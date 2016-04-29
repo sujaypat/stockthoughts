@@ -12,7 +12,9 @@ pp = pprint.PrettyPrinter(indent = 2)
 
 dynamodb = boto3.resource('dynamodb', region_name='us-west-1', endpoint_url="https://dynamodb.us-west-1.amazonaws.com")
 
-tickers = ["AAPL", "FB", "TWTR", "NFLX", "GOOG", "AMZN", "F", "T", "C", "S", "MSFT", "INTC", "GILD", "NVDA"]
+
+# tickers = ["AAPL", "FB", "TWTR", "NFLX", "GOOG", "AMZN", "F", "T", "C", "S", "MSFT", "INTC", "GILD", "NVDA", "GLD", "GDX", "CSCO", "AAL", "GE", "XOM", "IBM", 
+tickers = ["ORCL", "QCOM", "GRPN", "MU", "SIRI", "EBAY", "TSLA"]
 
 for symbol in tickers:
 	url = 'https://api.stocktwits.com/api/2/streams/symbol/' + symbol + '.json'
