@@ -1,14 +1,29 @@
 import boto3
 import requests
+import json
+import pprint
 
 client = boto3.client('dynamodb')
+pp = pprint.PrettyPrinter(indent = 2)
 
-req = requests.get('', auth = ('user', 'pass'))
+# req = requests.get('', auth = ('user', 'pass'))
 
 
+dynamodb = boto3.resource('dynamodb', region_name='us-west-1', endpoint_url="https://dynamodb.us-west-1.amazonaws.com")
 
+url = 'https://api.stocktwits.com/api/2/streams/symbol/AAPL.json'
 
-# dynamodb = boto3.resource('dynamodb', region_name='us-west-1', endpoint_url="https://dynamodb.us-west-1.amazonaws.com")
+# params = dict(
+#     origin='Chicago,IL',
+#     destination='Los+Angeles,CA',
+#     waypoints='Joplin,MO|Oklahoma+City,OK',
+#     sensor='false'
+# )
+
+resp = requests.get(url=url)#, params=params)
+data = json.loads(resp.text)
+
+pp.pprint(data)
 
 # table = dynamodb.Table('ticker')
 
