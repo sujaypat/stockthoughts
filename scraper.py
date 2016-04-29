@@ -2,6 +2,7 @@ import boto3
 import requests
 import json
 import pprint
+import time
 
 client = boto3.client('dynamodb')
 pp = pprint.PrettyPrinter(indent = 2)
@@ -11,17 +12,26 @@ pp = pprint.PrettyPrinter(indent = 2)
 
 dynamodb = boto3.resource('dynamodb', region_name='us-west-1', endpoint_url="https://dynamodb.us-west-1.amazonaws.com")
 
-url = 'https://api.stocktwits.com/api/2/streams/symbol/AAPL.json'
+tickers = ["AAPL", "FB", "TWTR", "NFLX", "GOOG", "AMZN", "F", "T", "C", "S", "MSFT", "INTC", "GILD", "NVDA"]
 
-# params = dict(
-#     origin='Chicago,IL',
-#     destination='Los+Angeles,CA',
-#     waypoints='Joplin,MO|Oklahoma+City,OK',
-#     sensor='false'
-# )
-
-resp = requests.get(url=url)#, params=params)
-data = json.loads(resp.text)
+for symbol in tickers:
+	url = 'https://api.stocktwits.com/api/2/streams/symbol/' + symbol + '.json'
+	resp = requests.get(url = url)
+	data = json.loads(resp.text)
+	pp.pprint(data)
+	for text in data['messages']:
+		# time.sleep(1)
+		response = client.put_item(
+			TableName = 'tweets',
+			Item = {
+				"ticker" : {
+					"S" : symbol,
+				},
+				"tweet" : {
+					"S" : text['body']
+				}
+			}
+		)
 
 pp.pprint(data)
 
