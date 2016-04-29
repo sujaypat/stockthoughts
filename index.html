@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>StockThoughts</title>
-
+	<link rel="stylesheet" href = "css/jquery.typeahead.min.css"/>
 	<link rel="stylesheet" href="css/bootstrap.min.css"/>
 	<!-- <link href="css/sticky-footer.css" rel="stylesheet">
 	<link href="css/dataTables.css" rel="stylesheet">
@@ -22,12 +22,31 @@
 			</h1>
 		</div>
 	</div>
-	<div class="container-fluid" id="inputTextContainer">
+
+	<form id="form-tickers" name="form-tickers">
+    <div class="typeahead__container">
+        <div class="typeahead__field">
+ 
+            <span class="typeahead__query">
+                <input class="js-typeahead-tickers" name="tickers[query]" type="search" placeholder="Enter stock ticker symbol here" autocomplete="off">
+            </span>
+            <span class="typeahead__button">
+                <button type="submit">
+                    <i class="typeahead__search-icon"></i>
+                </button>
+            </span>
+ 
+        </div>
+    </div>
+	</form>
+
+	<!-- <div class="container-fluid" id="inputTextContainer">
 		<textarea id="inputText" class="form-control" placeholder="Enter a stock ticker symbol here"></textarea>
 		<br/>
 		<button type="button" class="btn btn-primary btn-lg center-block"
 		id="analyzeButton">Go</button>
-	</div>
+	</div> -->
+
 	<!-- <div class="container-fluid" id="analyzerOutput">
 		<div class="container-fluid" id="processedText">
 			<table class="table table-bordered" id="sentenceList">
@@ -52,6 +71,9 @@
 	</footer>
 	<!-- <script src="javascript/handlebars.min.js"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    
+    <script src="js/jquery.typeahead.min.js"></script>
+    <script src="js/typeahead.js"</script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/dataTables.js"></script>
     <script src="js/dataTablesBootstrap.js"></script>
